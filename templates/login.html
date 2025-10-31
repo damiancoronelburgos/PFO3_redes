@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Entrar</button>
+    <p id="msg"></p>
+
+    <script>
+        async function login() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            const res = await fetch("/login", {
+                method: "POST",
+                body: new URLSearchParams({username: user, password: pass})
+            });
+            const data = await res.json();
+            document.getElementById("msg").innerText = data.status;
+            if(data.status.includes("exitoso")){
+                window.location.href = "/task";
+            }
+        }
+
+        // ✅ Permitir presionar Enter para iniciar sesión
+        document.getElementById("password").addEventListener("keydown", function(e){
+            if(e.key === "Enter"){
+                e.preventDefault(); // evita comportamiento por defecto
+                login();            // llama a la función login
+            }
+        });
+    </script>
+
+    <a href="/register">Ir a Registro</a>
+</body>
+</html>

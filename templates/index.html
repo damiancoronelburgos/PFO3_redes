@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Tareas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Calculadora Aritmética</h1>
+
+    <!-- Registro -->
+    <h2>Registro</h2>
+    <input type="text" id="regUser" placeholder="Usuario">
+    <input type="password" id="regPass" placeholder="Contraseña">
+    <button onclick="register()">Registrar</button>
+    <p id="regMsg"></p>
+
+    <!-- Login -->
+    <h2>Login</h2>
+    <input type="text" id="loginUser" placeholder="Usuario">
+    <input type="password" id="loginPass" placeholder="Contraseña">
+    <button onclick="login()">Entrar</button>
+    <p id="loginMsg"></p>
+
+    <!-- Operación -->
+    <h2>Enviar Operación</h2>
+    <input type="text" id="operation" placeholder="Ej: 3 + 5">
+    <button onclick="sendTask()">Enviar</button>
+
+    <!-- Resultados -->
+    <h2>Resultados</h2>
+    <ul id="resultsList"></ul>
+
+    <script>
+        // Registro
+        async function register() {
+            const user = document.getElementById("regUser").value;
+            const pass = document.getElementById("regPass").value;
+            const res = await fetch("/register", {
+                method: "POST",
+                body: new URLSearchParams({username: user, password: pass})
+            });
+            const data = await res.json();
+            document.getElementById("regMsg").innerText = data.status;
+        }
+
+        // Login
+        async function login() {
+            const user = document.getElementById("loginUser").value;
+            const pass = document.getElementById("loginPass").value;
+            const res = await fetch("/login", {
+                method: "POST",
+                body: new URLSearchParams({username: user, password: pass})
+            });
+            const data = await res.json();
+            document.getElementById("loginMsg").innerText = data.status;
+        }
+
+        // Enviar operación
+        async function sendTask() {
+            const op = document.getElementById("operation").value;
+            if(op.trim() === "") return; // no enviar vacío
+            await fetch("/task", {
+                method: "POST",
+                body: new URLSearchParams({operation: op})
+            });
+            document.getElementById("operation").value = "";
+            loadResults();
+        }
+
+        // Cargar resultados
+        async function loadResults() {
+            const res = await fetch("/results");
+            const results = await res.json();
+            const list = document.getElementById("resultsList");
+            list.innerHTML = "";
+            results.forEach(r => {
+                const li = document.createElement("li");
+                li.textContent = r;
+                list.appendChild(li);
+            });
+        }
+
+        // Actualizar resultados cada  segundos
+        setInterval(loadResults, 4000);
+
+        // ✅ Enviar operación con Enter
+        document.getElementById("operation").addEventListener("keydown", function(e){
+            if(e.key === "Enter"){
+                e.preventDefault();
+                sendTask();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Tareas Aritméticas</title>
+</head>
+<body>
+    <h1>Enviar Operación Aritmética</h1>
+    <input type="text" id="operation" placeholder="Ej: 3 + 5">
+    <button onclick="sendTask()">Enviar</button>
+
+    <h2>Resultados</h2>
+    <ul id="resultsList"></ul>
+
+    <button onclick="logout()">Cerrar sesión</button>
+
+    <script>
+        async function sendTask() {
+            const op = document.getElementById("operation").value;
+            if(op.trim() === "") return; // no enviar vacío
+            await fetch("/task", {
+                method: "POST",
+                body: new URLSearchParams({operation: op})
+            });
+            document.getElementById("operation").value = "";
+            loadResults();
+        }
+
+        async function loadResults() {
+            const res = await fetch("/results");
+            const results = await res.json();
+            const list = document.getElementById("resultsList");
+            list.innerHTML = "";
+            results.forEach(r => {
+                const li = document.createElement("li");
+                li.textContent = r;
+                list.appendChild(li);
+            });
+        }
+
+        setInterval(loadResults, 2000);
+
+        function logout(){
+            window.location.href = "/logout";
+        }
+
+        // ✅ Permitir presionar Enter para enviar la operación
+        document.getElementById("operation").addEventListener("keydown", function(e){
+            if(e.key === "Enter"){
+                e.preventDefault(); // evita comportamiento por defecto
+                sendTask();         // llama a la función sendTask
+            }
+        });
+    </script>
+</body>
+</html>
