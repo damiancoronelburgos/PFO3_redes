@@ -66,19 +66,22 @@ e. El resultado se guarda y se muestra en la interfaz web.
 
 2. **Crear un entorno virtual (opcional)**
 
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+python -m venv venv  
+source venv/bin/activate   # Linux/Mac  
+venv\Scripts\activate      # Windows  
 
 
 3. **Instalar dependencias**
 
+ ```bash
 pip install flask
+ ```
 
 4. **Ejecutar la aplicación**
 
+ ```bash
 python app.py
-
+ ```
 
 5. **Abrir el navegador en:**
 http://127.0.0.1:5000
