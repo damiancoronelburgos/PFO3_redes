@@ -48,11 +48,11 @@ El sistema está compuesto por:
 
 ##  Flujo de Funcionamiento
 
-a. El usuario se registra o inicia sesión
-b. Envía una operación aritmética (por ejemplo `5 + 3`).
-c. La operación se almacena en la base de datos y se coloca en una cola de tareas
-d. Los workers en segundo plano procesan la tarea.
-e. El resultado se guarda y se muestra en la interfaz web.
+a. El usuario se registra o inicia sesión  
+b. Envía una operación aritmética (por ejemplo `5 + 3`).  
+c. La operación se almacena en la base de datos y se coloca en una cola de tareas  
+d. Los workers en segundo plano procesan la tarea.  
+e. El resultado se guarda y se muestra en la interfaz web.  
 
 ---
 
