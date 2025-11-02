@@ -26,24 +26,20 @@ El sistema está compuesto por:
 
 ##  Estructura del Proyecto
 
-project/
-│
-├── app.py # Punto de inicio del servidor Flask
-├── auth.py # Registro e inicio de sesión de usuarios
-├── db.py # Creación y conexión a la base de datos SQLite
-├── routes.py # Definición de rutas y lógica de interacción
-├── tasks.py # Procesamiento en segundo plano con hilos
-│
-├── templates/ # Páginas HTML (Frontend)
-│ ├── index.html
-│ ├── login.html
-│ ├── register.html
-│ └── task.html
-│
-├── static/ # Archivos estáticos (CSS)
-│ └── style.css
-│
-└── app.db # Base de datos (se genera automáticamente)
+- project/
+  - app.py             : Punto de inicio del servidor Flask
+  - auth.py            : Registro e inicio de sesión de usuarios
+  - db.py              : Creación y conexión a la base de datos SQLite
+  - routes.py          : Definición de rutas y lógica de interacción
+  - tasks.py           : Procesamiento en segundo plano con hilos
+  - templates/         : Páginas HTML (Frontend)
+    - index.html
+    - login.html
+    - register.html
+    - task.html
+  - static/            : Archivos estáticos (CSS)
+    - style.css
+  - app.db             : Base de datos (se genera automáticamente)
 
 
 
@@ -87,6 +83,7 @@ python app.py
 5. **Abrir el navegador en:**
 http://127.0.0.1:5000
 
+---
 
 **Tecnologías Utilizadas:**
 
