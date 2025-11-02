@@ -1,6 +1,6 @@
 # PFO 3: Rediseño como Sistema Distribuido (Cliente-Servidor)
 
-Este proyecto fue desarrollado como parte de la **Practica Formativa Obligatoria N° 3** de la **Tecnicatura en Programación**.
+Este proyecto fue desarrollado como parte de la **Practica Formativa Obligatoria N° 3** de la **Tecnicatura en Desarrollo de Software**.
 
 ---
 
